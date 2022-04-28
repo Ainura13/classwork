@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Counter from "./components/Counter/Counter";
+import Receipts from "./components/Receipts/Receipts";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AddContact from "./components/AddContact/AddContact";
+import ContactList from "./components/ContactList/ContactList";
+
+import { useState } from "react";
+
 
 function App() {
+  let [contacts, setContacts] = useState([]);
+
+
+  function handleNewContact(newContact){
+    let newContactsArray = [...contacts];
+    newContactsArray.push(newContact);
+    setContacts(newContactsArray)
+  }
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <Counter/>
+     <Receipts/>
+      <AddContact
+      handleNewContact={handleNewContact}/>
+      <ContactList
+      contacts={contacts}
+      />
+    </>
   );
 }
 
